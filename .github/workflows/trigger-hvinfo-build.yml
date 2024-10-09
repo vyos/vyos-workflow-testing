@@ -1,4 +1,4 @@
-name: Trigger VPP build
+name: Trigger hvinfo build
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ jobs:
   trigger_build:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger VPP build
+      - name: Trigger hvinfo build
         run: |
           curl -L \
             -X POST \
@@ -15,4 +15,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.PAT }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ secrets.REMOTE_OWNER }}/${{ secrets.REMOTE_REUSE_REPO }}/actions/workflows/build-package.yml/dispatches \
-            -d '{"ref": "vpp-testing", "inputs":{"package_name":"vpp", "gpg_key_id": "${{ secrets.GPG_KEY_ID }}", "package_branch": "current", "pat":"${{ secrets.PAT }}"}}'
+            -d '{"ref": "main", "inputs":{"package_name":"hvinfo", "gpg_key_id": "${{ secrets.GPG_KEY_ID }}", "package_branch": "current", "pat":"${{ secrets.PAT }}"}}'
