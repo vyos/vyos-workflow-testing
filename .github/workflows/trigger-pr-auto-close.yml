@@ -1,0 +1,17 @@
+name: Auto-Close Pull Requests
+
+on:
+  pull_request:
+    branches:
+      - sagitta
+
+jobs:
+  auto_close_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close and Delete Branch
+        run: |
+          set -eux
+          gh pr close ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --comment "Pull requests to this branch are not accepted and have been closed automatically." --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
