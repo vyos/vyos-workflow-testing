@@ -14,4 +14,5 @@ jobs:
           set -eux
           gh pr close ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --comment "Pull requests to this branch are not accepted and have been closed automatically." --delete-branch
         env:
-          GH_TOKEN: ${{ secrets.PAT }}
+          # GH_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ github.token }}
