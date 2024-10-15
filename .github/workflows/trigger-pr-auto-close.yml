@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - sagitta
+  
+permissions:
+  pull-requests: write
 
 jobs:
   auto_close_pr:
