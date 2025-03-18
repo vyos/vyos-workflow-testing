@@ -24,7 +24,7 @@ jobs:
               }
             ]
 
-      - name: "Release publishing: create autocommit and tag"
+      - name: "Create autocommit and tag"
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           tagging_message: 1.5-rolling-202503031030
@@ -37,5 +37,15 @@ jobs:
           path: vyos-workflow-version-tmp
 
       - name:
-        run: sleep 1800 
+        run: |
+          cp -p version.json ./vyos-workflow-version-tmp
+
+      - name: "Release publishing: create autocommit and tag"
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          tagging_message: 1.5-rolling-202503031030
+          commit_message: 1.5-rolling-202503031030
+          commit_author: "vyosbot <autobuild@vyos.net>"
+          repository: ./vyos-workflow-version-tmp
+          
 
