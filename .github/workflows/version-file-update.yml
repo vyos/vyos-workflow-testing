@@ -5,7 +5,7 @@ on:
 
 jobs:
   file_update:
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     permissions:
       contents: write
     steps:
@@ -18,16 +18,24 @@ jobs:
           json: |
             [
               {
-                "url": "https://github.com/vyos/vyos-nightly-build/releases/download/1.5-rolling-202503030030/vyos-1.5-rolling-202503030030-generic-amd64.iso",
-                "version": "1.5-rolling-202503030030",
-                "timestamp": "2025-03-03T00:30:48Z"
+                "url": "https://github.com/vyos/vyos-nightly-build/releases/download/1.5-rolling-202503031030/vyos-1.5-rolling-202503031030-generic-amd64.iso",
+                "version": "1.5-rolling-202503031030",
+                "timestamp": "2025-03-03T10:30:48Z"
               }
             ]
 
       - name: "Release publishing: create autocommit and tag"
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          tagging_message: 1.5-rolling-202503030030
-          commit_message: 1.5-rolling-202503030030
+          tagging_message: 1.5-rolling-202503031030
+          commit_message: 1.5-rolling-202503031030
           commit_author: "vyosbot <autobuild@vyos.net>"
+
+      - uses: actions/checkout@v4
+        with:
+          repository: vyos/vyos-workflow-version-tmp
+          path: vyos-workflow-version-tmp
+
+      - name:
+        run: sleep 1800 
 
