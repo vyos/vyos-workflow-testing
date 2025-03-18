@@ -18,8 +18,8 @@ jobs:
           json: |
             [
               {
-                "url": "https://github.com/vyos/vyos-nightly-build/releases/download/1.5-rolling-202503031030/vyos-1.5-rolling-202503031030-generic-amd64.iso",
-                "version": "1.5-rolling-202503031030",
+                "url": "https://github.com/vyos/vyos-nightly-build/releases/download/1.5-rolling-202503031031/vyos-1.5-rolling-202503031031-generic-amd64.iso",
+                "version": "1.5-rolling-202503031031",
                 "timestamp": "2025-03-03T10:30:48Z"
               }
             ]
@@ -27,8 +27,8 @@ jobs:
       - name: "Create autocommit and tag"
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          tagging_message: 1.5-rolling-202503031030
-          commit_message: 1.5-rolling-202503031030
+          tagging_message: 1.5-rolling-202503031031
+          commit_message: 1.5-rolling-202503031031
           commit_author: "vyosbot <autobuild@vyos.net>"
 
       - name: Update version.json in the remote repo
@@ -39,8 +39,8 @@ jobs:
           git config --global user.name "vyosbot"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add version.json
-          git commit -m "1.5-rolling-202503031030"
-          git tag 1.5-rolling-202503031030
+          git commit -m "1.5-rolling-202503031031"
+          git tag 1.5-rolling-202503031031
           git push https://x-access-token:${{ secrets.PAT }}@github.com/vyos/vyos-workflow-version-tmp.git main --tags
           
 
