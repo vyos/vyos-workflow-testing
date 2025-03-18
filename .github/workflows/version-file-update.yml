@@ -31,21 +31,16 @@ jobs:
           commit_message: 1.5-rolling-202503031030
           commit_author: "vyosbot <autobuild@vyos.net>"
 
-      - uses: actions/checkout@v4
-        with:
-          repository: vyos/vyos-workflow-version-tmp
-          path: vyos-workflow-version-tmp
-
-      - name:
+      - name: Update version.json in the remote repo
         run: |
-          cp -p version.json ./vyos-workflow-version-tmp
-
-      - name: "Release publishing: create autocommit and tag"
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          tagging_message: 1.5-rolling-202503031030
-          commit_message: 1.5-rolling-202503031030
-          commit_author: "vyosbot <autobuild@vyos.net>"
-          repository: ./vyos-workflow-version-tmp
+          git clone https://github.com/vyos/vyos-workflow-version-tmp.git
+          cd vyos-workflow-version-tmp
+          cp -p ../version.json .
+          git config --global user.name "vyosbot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add version.json
+          git commit -m "1.5-rolling-202503031030"
+          git tag 1.5-rolling-202503031030
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/vyos/vyos-workflow-version-tmp.git main --tags
           
 
