@@ -1,0 +1,13 @@
+name: "CLA Check"
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+  issue_comment:
+    types: [created]
+
+jobs:
+  call-cla-assistant:
+    uses: vyos/vyos-cla-signatures/.github/workflows/cla-reusable.yml@current
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_PAT }}
