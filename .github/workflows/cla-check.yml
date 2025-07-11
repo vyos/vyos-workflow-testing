@@ -7,7 +7,7 @@ permissions:
   statuses: write
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, closed]
   issue_comment:
     types: [created]
@@ -25,7 +25,7 @@ jobs:
         with:
           path-to-signatures: 'signatures/version1/cla.json'
           path-to-document: 'https://github.com/vyos/vyos-cla-signatures/blob/current/README.md'
-          branch: 'current'
+          branch: 'main'
           allowlist: 'vyosbot,pre-commit-ci,dependabot,codecov,mergify,netlify'
           remote-organization-name: 'vyos'
           remote-repository-name: 'vyos-cla-signatures'
